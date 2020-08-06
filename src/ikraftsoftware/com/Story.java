@@ -151,7 +151,7 @@ public class Story {
             case "pickUpRifle":
                 if (!player.currentWeapon.name.equals("Savage .306")) {
                     player.currentWeapon = new Weapon_Rifle();
-                    player.currentWeapon.mainText = player.currentWeapon.mainText + "Your on the Grassy Knoll with a new Savage .306!";
+                    player.currentWeapon.mainText = player.currentWeapon.mainText + "Your on the Grassy Knoll with a new Savage .30612!";
                     processWeapon(player.currentWeapon, locationArray[array[3]], 20);
                 }
                 break;
