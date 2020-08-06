@@ -29,8 +29,8 @@ public class Story {
     public int healthNum = 0; // Keep track of your place in the array
     public int coinNum = 0; // Keep track of your place in the array
 
-    SuperLocation[] locationArray = new SuperLocation[8]; // Need to be the same length
-    int[] array = new int[8]; // Need to be the same length
+    SuperLocation[] locationArray = new SuperLocation[9]; // Need to be the same length
+    int[] array = new int[9]; // Need to be the same length
 
     SuperLocation townGate;
     String currentLocation;
@@ -136,7 +136,16 @@ public class Story {
                 currentLocation = locationArray[array[7]].identifier;
                 refreshDisplay(locationArray[array[7]]);
                 break;
-
+            case "theBaseballPark":
+                currentLocation = locationArray[array[8]].identifier;
+                refreshDisplay(locationArray[array[8]]);
+                healthNum = 1;
+                if (healthAward[healthNum] != 0) {
+                    healthAward[healthNum] = rand(-30,20);
+                    if (healthAward[healthNum] == 0) healthAward[healthNum] = -20;
+                } else ui.mainTextArea.setText(" Your at the baseball park with Dr Fauci.");
+                if (healthAward[healthNum] < 0) ui.mainTextArea.setText(ui.mainTextArea.getText()+" Fauci gave you covid!");
+               break;
 
 
             //Weapons
@@ -272,7 +281,7 @@ public class Story {
             ui.hpNumberLabel.setText("" + player.hp);
             if (awardValue > 0) playSound("src/health.wav");
             healthAward[healthNum] = 0;
-        }
+          }
 
     }
 
@@ -627,6 +636,7 @@ public class Story {
         locationArray[array[5]] = new Location_HealthSpa();
         locationArray[array[6]] = new Location_TJMax();
         locationArray[array[7]] = new Location_TheLake();
+        locationArray[array[8]] = new Location_Baseball();
 
         //First row of map grid
         locationArray[0].p2 = "blocked";
@@ -641,7 +651,7 @@ public class Story {
         locationArray[1].p5 = locationArray[0].identifier; // 1
 
         locationArray[2].p2 = "townGate";
-        locationArray[2].p3 = "temp";
+        locationArray[2].p3 = locationArray[8].identifier;
         locationArray[2].p4 = locationArray[3].identifier;
         locationArray[2].p5 = locationArray[1].identifier;//2
 
@@ -669,9 +679,13 @@ public class Story {
 
         locationArray[7].p2 = locationArray[1].identifier;
         locationArray[7].p3 = "temp";
-        locationArray[7].p4 = "temp";
+        locationArray[7].p4 = locationArray[8].identifier;;
         locationArray[7].p5 =  locationArray[6].identifier;
 
+        locationArray[8].p2 = locationArray[2].identifier;
+        locationArray[8].p3 = "temp";
+        locationArray[8].p4 = "temp";
+        locationArray[8].p5 =  locationArray[7].identifier;
 
     }
 
