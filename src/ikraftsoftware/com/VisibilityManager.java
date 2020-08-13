@@ -12,7 +12,8 @@ public class VisibilityManager {
         // Hide Game Scree stuff
         ui.mainTextPanel.setVisible(false);
         ui.choiceButtonPanel.setVisible(false);
-        ui.playerPanel.setVisible(false);
+        ui.playerPanel1.setVisible(false);
+        ui.playerPanel2.setVisible(false);
     }
     public void hideTitleScreen(){
         // Hide Title Screen
@@ -21,7 +22,8 @@ public class VisibilityManager {
         // Show Game Scree stuff
         ui.mainTextPanel.setVisible(true);
         ui.choiceButtonPanel.setVisible(true);
-        ui.playerPanel.setVisible(true);
+        ui.playerPanel1.setVisible(true);
+        ui.playerPanel2.setVisible(true);
 
     }
 }

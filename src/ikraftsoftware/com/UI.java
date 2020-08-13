@@ -1,17 +1,19 @@
 package ikraftsoftware.com;
+import javafx.geometry.HorizontalDirection;
+
 import java.awt.*;
 import javax.swing.*;
 
 public class UI {
     JFrame window;
-    JPanel titleNamePanel,startButtonPanel,mainTextPanel,choiceButtonPanel,playerPanel;
-    JLabel titleNameLabel,hpLabel,hpNumberLabel,coinLabel,coinNumberLabel,weaponLabel,weaponNameLabel,gregLabel;
+    JPanel titleNamePanel,startButtonPanel,mainTextPanel,choiceButtonPanel,playerPanel1,playerPanel2;
+    JLabel titleNameLabel,hpLabel,hpNumberLabel,coinLabel,coinNumberLabel,weaponLabel,weaponNameLabel,gregLabel,cordLabel,cordxyLabel;
     JTextArea mainTextArea;
     JButton startButton,choice1,choice2,choice3,choice4,choice5;
     Font titleFont = new Font("Time New Roman",Font.PLAIN,70);
     Font normalFont = new Font("Time New Roman",Font.PLAIN,26);
     Font smallFont = new Font("Time New Roman",Font.BOLD,20);
-    Font smallerFont = new Font("Time New Roman",Font.BOLD,12);
+    Font smallerFont = new Font("Time New Roman",Font.BOLD,13);
 
     public UI() {
     }
@@ -23,6 +25,11 @@ public class UI {
         window.setDefaultCloseOperation(3);
         window.getContentPane().setBackground(Color.black);
         window.setLayout(null);
+//        window.setLayout(new GridBagLayout());
+//        GridBagConstraints c = new GridBagConstraints();
+//        c.fill = GridBagConstraints.VERTICAL;
+//
+
 
 
         // Title Screen
@@ -41,7 +48,7 @@ public class UI {
 
 
         startButtonPanel = new JPanel();
-        startButtonPanel.setBounds(300,400,200,100);
+        startButtonPanel.setBounds(300,600,200,100);
         startButtonPanel.setBackground(Color.black);
         startButton = new JButton("START");
         startButton.setBackground(Color.green);
@@ -61,7 +68,7 @@ public class UI {
         mainTextPanel.setBackground(Color.black);
 
         mainTextArea = new JTextArea("This is the main text area");
-        mainTextArea.setBounds(100,100,600,250);
+        mainTextArea.setBounds(100,100,600,200);
         mainTextArea.setBackground(Color.black);
         mainTextArea.setForeground(Color.magenta);
         mainTextArea.setFont(smallFont);
@@ -125,11 +132,17 @@ public class UI {
         choiceButtonPanel.add(choice5);
 
 
-        playerPanel = new JPanel();
-        playerPanel.setBounds(100,15,600,50);
-        playerPanel.setBackground(Color.black);
-        playerPanel.setForeground(Color.white);
-        playerPanel.setLayout(new GridLayout(1,6));
+        playerPanel1 = new JPanel();
+        playerPanel1.setBounds(100,15,600,25);
+        playerPanel1.setBackground(Color.black);
+        playerPanel1.setForeground(Color.white);
+        playerPanel1.setLayout(new GridLayout(1,4));
+
+        playerPanel2 = new JPanel();
+        playerPanel2.setBounds(100,40,600,25);
+        playerPanel2.setBackground(Color.black);
+        playerPanel2.setForeground(Color.white);
+        playerPanel2.setLayout(new GridLayout(1,4));
 
        //Add Status Labels
         hpLabel = new JLabel("Health:");
@@ -138,8 +151,8 @@ public class UI {
         hpNumberLabel = new JLabel();
         hpNumberLabel.setForeground(Color.white);
         hpNumberLabel.setFont(smallFont);
-        playerPanel.add(hpLabel);
-        playerPanel.add(hpNumberLabel);
+        playerPanel1.add(hpLabel);
+        playerPanel1.add(hpNumberLabel);
 
         coinLabel = new JLabel("Coins:");
         coinLabel.setFont(smallFont);
@@ -147,20 +160,28 @@ public class UI {
         coinNumberLabel = new JLabel();
         coinNumberLabel.setForeground(Color.white);
         coinNumberLabel.setFont(smallFont);
-        playerPanel.add(coinLabel);
-        playerPanel.add(coinNumberLabel);
+        playerPanel1.add(coinLabel);
+        playerPanel1.add(coinNumberLabel);
+        window.add(playerPanel1);
 
         weaponLabel = new JLabel("Weapon:");
         weaponLabel.setFont(smallerFont);
         weaponLabel.setForeground(Color.green);
-        playerPanel.add(weaponLabel);
-
+        playerPanel2.add(weaponLabel);
         weaponNameLabel = new JLabel();
         weaponNameLabel.setForeground(Color.white);
         weaponNameLabel.setFont(smallerFont);
-        playerPanel.add(weaponNameLabel);
-        window.add(playerPanel);
+        playerPanel2.add(weaponNameLabel);
 
+        cordLabel = new JLabel("Coordinates");
+        cordLabel.setFont(smallerFont);
+        cordLabel.setForeground(Color.green);
+        playerPanel2.add(cordLabel);
+        cordxyLabel = new JLabel();
+        cordxyLabel.setForeground(Color.white);
+        cordxyLabel.setFont(smallerFont);
+        playerPanel2.add(cordxyLabel);
+        window.add(playerPanel2);
 
         window.setVisible(true);
 

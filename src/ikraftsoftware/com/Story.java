@@ -29,8 +29,11 @@ public class Story {
     public int healthNum = 0; // Keep track of your place in the array
     public int coinNum = 0; // Keep track of your place in the array
 
-    SuperLocation[] locationArray = new SuperLocation[9]; // Need to be the same length
-    int[] array = new int[9]; // Need to be the same length
+    SuperLocation[] locationArray = new SuperLocation[10]; // Need to be the same length
+    int[] array = new int[10]; // Need to be the same length
+    String[] cordArray = new String[]{"-2,0","-1,0","0,0","1,0","2,0","3,0","-2,-1","-1,-1","0,-1","1,-1","2,-1","3,-1","-2,-2"
+            ,"-1,-2","0,-2","1,-2","2,-2","3,-2","-2,-3","-1,-3","0,-3","1,-3","2,-3","3,-3","-2,-4","-1,-4","0,-4","1,-4","2,-4","3,-4",
+            "-2,-5","-1,-5","0,-5","1,-5","2,-5","3,-5","0,1"};
 
     SuperLocation townGate;
     String currentLocation;
@@ -68,19 +71,19 @@ public class Story {
         }
         for (int i = 0; i < 5; i++) { // 5 awards are random amounts (even negative) next 5 are set values
             coinsAward[i] = rand(10, 60);
-            if (coinsAward[i] == 0) coinsAward[1] = 5;
+
         }
         // 5 awards are random amounts (even negative) next 5 are set values. Like below.
         healthAward[5] = 35;
         healthAward[6] = 35;
         healthAward[7] = 35;
-        healthAward[8] = 35;
-        healthAward[9] = 35;
+        healthAward[8] = 45;
+        healthAward[9] = 45;
         coinsAward[5] = 35;
         coinsAward[6] = 35;
         coinsAward[7] = 35;
-        coinsAward[8] = 35;
-        coinsAward[9] = 35;
+        coinsAward[8] = 45;
+        coinsAward[9] = 45;
 
         randomizeLocations(); // Place locations on grid and connect them North, South, East and West.
     }
@@ -123,9 +126,9 @@ public class Story {
                 refreshDisplay(locationArray[array[4]]);
                 break;
             case "theFairfaxSpa":
+                healthNum = 5;
                 currentLocation = locationArray[array[5]].identifier;
                 refreshDisplay(locationArray[array[5]]);
-                healthNum = 5;
                 break;
             case "tjMax":
                 healthNum = 0;
@@ -146,7 +149,10 @@ public class Story {
                 } else ui.mainTextArea.setText(" Your at the baseball park with Dr Fauci.");
                 if (healthAward[healthNum] < 0) ui.mainTextArea.setText(ui.mainTextArea.getText()+" Fauci gave you covid!");
                break;
-
+            case "theSubway":
+                currentLocation = locationArray[array[9]].identifier;
+                refreshDisplay(locationArray[array[9]]);
+                break;
 
             //Weapons
             case "pickUpSword":
@@ -197,9 +203,15 @@ public class Story {
                 break;
             case "fightTed":
                 currentMonster = 4;
-                pickAMonster(locationArray[array[7]], 4);
+                pickAMonster(locationArray[array[7]], currentMonster);
                 locationArray[array[7]].mainText = "Your by a foggy lake with a fat dead Ghost of Ted Kennedy";
                 break;
+            case "fightSubwayBum":
+                currentMonster = 3;
+                pickAMonster(locationArray[array[7]], currentMonster);
+                locationArray[array[7]].mainText = "Your in a dingy dirty subway...";
+                break;
+
 
              case "evaluateFight":
                 evaluateFight();
@@ -332,6 +344,19 @@ public class Story {
         }
     }
 
+    public int findLocationIndex(SuperLocation l) {
+        int x = 0;
+        for (int i = 0; i < 9; i++) {
+            if (locationArray[i].identifier.equals(l.identifier))
+                x = i;
+        }
+        if (l.identifier.equals("townGate")) x = 36;
+      return x;
+    }
+
+
+
+
     public void refreshDisplay(SuperLocation location) {
         if (player.hp < 1) lose();
         else {
@@ -349,7 +374,7 @@ public class Story {
             ui.hpNumberLabel.setText("" + player.hp);
             ui.coinNumberLabel.setText("" + player.coins);
             ui.weaponNameLabel.setText(player.currentWeapon.name);
-
+            ui.cordxyLabel.setText(cordArray[findLocationIndex(location)]);
             //   ui.choice2.setVisible(true);
         }
 
@@ -637,6 +662,7 @@ public class Story {
         locationArray[array[6]] = new Location_TJMax();
         locationArray[array[7]] = new Location_TheLake();
         locationArray[array[8]] = new Location_Baseball();
+        locationArray[array[9]] = new Location_Subway();
 
         //First row of map grid
         locationArray[0].p2 = "blocked";
@@ -656,7 +682,7 @@ public class Story {
         locationArray[2].p5 = locationArray[1].identifier;//2
 
         locationArray[3].p2 = "blocked";
-        locationArray[3].p3 = "temp";
+        locationArray[3].p3 = locationArray[9].identifier;
         locationArray[3].p4 = locationArray[4].identifier;
         locationArray[3].p5 = locationArray[2].identifier;//3
 
@@ -684,9 +710,13 @@ public class Story {
 
         locationArray[8].p2 = locationArray[2].identifier;
         locationArray[8].p3 = "temp";
-        locationArray[8].p4 = "temp";
+        locationArray[8].p4 = locationArray[9].identifier;
         locationArray[8].p5 =  locationArray[7].identifier;
 
+        locationArray[9].p2 = locationArray[3].identifier;
+        locationArray[9].p3 = "temp";
+        locationArray[9].p4 = "temp";
+        locationArray[9].p5 =  locationArray[8].identifier;
     }
 
 
